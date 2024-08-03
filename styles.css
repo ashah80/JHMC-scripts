@@ -1,0 +1,243 @@
+/*stuff that everything needs*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: "Epilogue", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  p {
+    font-family: "Inter", sans-serif;
+  }
+
+  .MathJax_Display {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.MathJax {
+    display: inline !important;
+}
+/*what page am i on?*/
+
+.slider {
+    position: absolute;
+    top: 4em;
+    left: 2em;
+    background-color: transparent;
+    font-size: 1em;
+    text-align: left;
+  }
+  
+  .slider p {
+    margin: 0;
+  }
+/*article stuff*/
+
+.article {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgb(229, 231, 252); 
+    border-radius: 24px; 
+    margin: 8em 2em;
+    margin-bottom: .5em;
+  }
+  
+  .article i {
+    font-size: 1.3em;
+    color: white;
+    background-color: #1821ADFF;
+    border-radius: 50%;
+    padding: 0.4em;
+    margin-right: .8em;
+    margin-left: -.25em;
+  }
+  
+  .article p {
+    font-size: 1.1em;
+    margin-right: 2em;
+    color: #1821ADFF;
+  }
+  
+  /*page header*/
+  
+  .header {
+    color: #171A1FFF;
+    padding-left: 1em;
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: 400;
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  /*everything in left column*/
+  
+  .left {
+    float: left;
+    width: 30%;
+    padding: 2em;
+  }
+  
+  .left img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .left p {
+    margin-top: .5em;
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  /*everything in right column*/
+  
+  .right {
+    float: right;
+    width: 70%;
+    padding: 2em;
+  }
+  
+  .right .divider {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 2em;
+  }
+  
+  .right .explanation {
+    margin-bottom: 2em;
+  }
+  
+  .right .explanation p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    text-indent: 2em;
+  }
+  
+  .right .section1, .right .section2 {
+    background-color: rgb(229, 231, 252);
+    padding: 1em;
+    border: 1px solid #ddd;
+    margin-bottom: 2em;
+  }
+  
+  .right .section1 a, .right .section2 a {
+    text-decoration: none;
+    color: #1821ADFF;
+  }
+  
+  .right .section1 a:hover, .right .section2 a:hover {
+    color: rgb(1, 9, 110);
+  }
+  
+  .right .section1 p, .right .section2 p {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.5em;
+  }
+  /*text that will wants to be collapsible*/
+
+  .collapsible {
+    border: .1em solid #ccc;
+    margin-bottom: 20px;
+}
+
+.collapsible-btn {
+  background-color: rgb(229, 231, 252);
+  color: #171A1FFF;  
+  padding: 1em;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.collapsible-content {
+  display: none;
+}
+.collapsible-content ul {
+  margin-left: 4em;
+  font-family: "Inter", sans-serif;
+}
+.collapsible-content p {
+  margin: 1em 2em;
+  text-indent: 2em;
+  font-family: "Inter", sans-serif;
+}
+
+.collapsible-content.collapsed {
+  display: none; 
+}
+
+.collapsible-content:not(.collapsed) {
+  display: block;
+}
+  
+  /*nav buttons*/
+  
+  .navigation-buttons {
+    margin-top: 2em;
+    text-align: center;
+  }
+  
+  .prev-btn, .next-btn {
+    background-color: #1821ADFF;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    font-size: 1.1em;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .prev-btn:hover, .next-btn:hover {
+    background-color: rgb(1, 9, 110);
+  }
+
+  /*responsive*/
+  
+  @media only screen and (max-width: 768px) {
+    .left, .right {
+      float: none;
+      width: 100%;
+    }
+    .left {
+      margin-bottom: 2em;
+    }
+    .right .section1, .right .section2 {
+      margin-bottom: 1em;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .article i {
+      font-size: 2em;
+    }
+    .header h1 {
+      font-size: 1.5em;
+    }
+    .left img {
+      height: 100px;
+    }
+    .right .explanation p {
+      font-size: 1em;
+    }
+    .right .section1, .right .section2 {
+      padding: 0.5em;
+    }
+  }
