@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="canonical" href="https://imsajhmc.com/about" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <title>Sidebar With Bootstrap</title>
+
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: white;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: cover;
+        }
+
+        h3 {
+            font-size: 1.2375rem;
+            color: black;
+        }
+
+        a {
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* Layout skeleton */
+
+        .wrapper {
+            align-items: stretch;
+            display: flex;
+            width: 100%;
+        }
+
+        #sidebar {
+            max-width: 264px;
+            min-width: 264px;
+            transition: all 0.35s ease-in-out;
+            box-shadow: 0 0 35px 0 rgba(49, 57, 66, 0.5);
+            z-index: 1111;
+        }
+
+        /* Sidebar collapse */
+
+        #sidebar.collapsed {
+            margin-left: -264px;
+        }
+
+        .main {
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .sidebar-logo {
+            padding: 1.15rem 1.5rem;
+        }
+
+        .sidebar-logo a {
+            color: black;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .sidebar-nav {
+            padding: 0;
+        }
+
+        .sidebar-header {
+            color: black;
+            font-weight: bolder;
+            font-size: 1 rem;
+            padding: 1.5rem 1.5rem .375rem;
+        }
+
+        a.sidebar-link {
+            padding: .625rem 1.625rem;
+            color: black;
+            position: relative;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .sidebar-link[data-bs-toggle="collapse"]::after {
+            border: solid;
+            border-width: 0 .075rem .075rem 0;
+            content: "";
+            display: inline-block;
+            padding: 2px;
+            position: absolute;
+            right: 1.5rem;
+            top: 1.4rem;
+            transform: rotate(-135deg);
+            transition: all .2s ease-out;
+        }
+
+        .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+            transform: rotate(45deg);
+            transition: all .2s ease-out;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="h-100">
+                <div class="sidebar-logo">
+                    <a href="#">Mu Alpha Theta</a>
+                </div>
+                <!-- Sidebar Navigation -->
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Lessons
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi-house pe-2"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#Chapter1"
+                            aria-expanded="false" aria-controls="Chapter1">
+                            <i class="bi-book pe-2"></i>
+                            Chapter 1
+                        </a>
+                        <ul id="Chapter1" class="sidebar-dropdown list-unstyled collapse mx-3" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 1</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 2</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#Chapter2"
+                            aria-expanded="false" aria-controls="Chapter2">
+                            <i class="bi-book pe-2"></i>
+                            Chapter 2
+                        </a>
+                        <ul id="Chapter2" class="sidebar-dropdown list-unstyled collapse mx-3" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 1</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 2</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 3</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#Chapter3"
+                            aria-expanded="false" aria-controls="Chapter3">
+                            <i class="bi-book pe-2"></i>
+                            Chapter 3
+                        </a>
+                        <ul id="Chapter3" class="sidebar-dropdown list-unstyled collapse mx-3" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 1</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 2</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="bi-journal-text pe-2"></i>Lesson 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Main Component -->
+        <div class="main">
+            <nav class="navbar navbar-expand px-3">
+                <!-- Button for sidebar toggle -->
+                <button class="btn" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+            <main class="container">
+                <div class="flex-row">
+                    <div class="mb-3 align-content-center">
+                        <h3>Textbook Content</h3>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script>
+        const toggler = document.querySelector(".btn");
+        toggler.addEventListener("click",function(){
+            document.querySelector("#sidebar").classList.toggle("collapsed");
+        });
+    </script>
+</body>
+
+</html>

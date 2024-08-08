@@ -9,9 +9,9 @@ collapsibleBtns.forEach((btn, index) => {
 });
 
 //IGNORE THIS PART - THIS IS FOR AARAV
-const sidebar = document.querySelector('.sidebar');
-const toggleButton = document.querySelector('.toggle-sidebar');
-const caret = toggleButton.querySelector('.fa-angle-right');
+// const sidebar = document.querySelector('.sidebar');
+// const toggleButton = document.querySelector('.toggle-sidebar');
+// const caret = toggleButton.querySelector('.fa-angle-right');
 
 
 toggleButton.addEventListener('click', () => {
