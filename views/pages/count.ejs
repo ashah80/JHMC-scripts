@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="slider">
+        <p><%= breadcrumb %></p>
+    </div>
+    <div class="article">
+        <i class="fas fa-book"></i>
+        <p>Article</p>
+    </div>
+    <div class="header">
+        <h1><%= chapterTitle %></h1>
+    </div>
+    <div class="left">
+        <img src="<%= imageSrc %>" alt="Chapter Image">
+        <p>Last Edited: <%= lastEdited %></p>
+    </div>
+    <div class="right">
+        <div class="divider"></div>
+        <div class="header">
+            <h1><%= sectionTitle %></h1>
+        </div>
+        <div class="explanation">
+            <p><%= explanation %></p>
+        </div>
+        <div class="collapsible">
+            <button class="collapsible-btn">Fundamentals of Counting</button>
+            <div class="collapsible-content">
+                <p>The following five methods in this section are the fundamental ways in which a combinatorial problem may be solved. Every combinatorial solution will fall into one (or more) of these categories. Oftentimes, multiple methods may be employed in conjunction to solve a more complicated problem.</p>
+                <ul>
+                    <% fundamentals.forEach(function(fundamental) { %>
+                        <li><%= fundamental.name %></li>
+                        <% if (fundamental.subcategories && fundamental.subcategories.length) { %>
+                            <ul>
+                                <% fundamental.subcategories.forEach(function(subcategory) { %>
+                                    <li><%= subcategory %></li>
+                                <% }); %>
+                            </ul>
+                        <% } %>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+        <div class="collapsible">
+            <button class="collapsible-btn">Counting Techniques</button>
+            <div class="collapsible-content">
+                <p><%= techniquesDescription %></p>
+                <ul>
+                    <% techniques.forEach(function(technique) { %>
+                        <li><%= technique %></li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+        <div class="navigation-buttons">
+            <a href="<%= prevLink %>" class="btn prev-btn">Previous</a>
+            <a href="<%= nextLink %>" class="btn next-btn">Next [Probability]</a>
+        </div>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>

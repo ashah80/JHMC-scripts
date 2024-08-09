@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <p><%= breadcrumb %></p>
+    </div>
+    <div class="article">
+        <i class="fas fa-book"></i>
+        <p>Article</p>
+    </div>
+    <div class="header">
+        <h1><%= chapterTitle %></h1>
+    </div>
+    <div class="left">
+        <img src="<%= imageSrc %>" alt="Chapter Image">
+        <p>Last Edited: <%= lastEdited %></p>
+    </div>
+    <div class="right">
+        <div class="divider"></div>
+        <div class="explanation">
+            <p><%= explanation %></p>
+        </div>
+        <div id="sections" class="section1">
+            <a href="<%= countLink %>">Counting</a>
+            <p><%= countDescription %></p>
+        </div>
+        <div id="sections" class="section2">
+            <a href="<%= probabilityLink %>">Probability</a>
+            <p><%= probabilityDescription %></p>
+        </div>
+    </div>
+</body>
+</html>
