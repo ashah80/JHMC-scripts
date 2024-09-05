@@ -1,8 +1,7 @@
-runtime: nodejs
-env: flex
+runtime: nodejs20
+env: standard
+#manual_scaling:
+#  instances: 1
 
-manual_scaling:
-  instances: 1
-
-network:
-  session_affinity: true
+#network:
+#  session_affinity: true

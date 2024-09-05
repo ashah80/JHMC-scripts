@@ -19,8 +19,9 @@
     "humanize-duration": "^3.28.0",
     "md-to-pdf": "^5.1.0",
     "mdToPdf": "^1.0.4",
-    "nodemon": "^1.19.4",
+    "nodemon": "^3.1.4",
     "path-to-regexp": "^6.2.1",
+    "punycode": "^2.3.1",
     "shelljs": "^0.8.4",
     "socket.io": "^4.7.1",
     "ts-node": "^10.9.2",
@@ -42,5 +43,8 @@
     "url": "https://github.com/thewindsofwinter/JHMC-scripts/issues"
   },
   "homepage": "https://github.com/thewindsofwinter/JHMC-scripts#readme",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": "22.x"
+  }
 }

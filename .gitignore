@@ -133,3 +133,7 @@ secrets.js
 *.html
 
 schools-private-rosters/*
+
+#Gcloud
+.*/
+package-lock.json
