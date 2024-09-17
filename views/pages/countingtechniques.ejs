@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counting Techniques</title>
+    <link rel="stylesheet" href="chaptermainstyles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="top">
+        <p>JHMC Academy > Combinatorics > Counting Techniques</p>
+        <h1>Counting Techniques</h1>
+    </div>
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html"><h1>JHMC Academy | Combinatorics</h1></a>
+            <h4>Table of Contents</h4>
+            <div class="divider"></div>
+            <div class="section1 mainsection">
+                <h2><a href="combinatorics.html"><i class="fa  fa-info-circle"></i> Introduction to Combinatorics</h2></a>
+            </div>
+            <div class="section1 mainsection">
+                <h2><a href="introductiontocounting.html"><i class="fa-solid fa-calculator"></i> Intro to Counting</h2></a>
+                <h3><a href="fundamentalsofcounting.html"><i class="fa fa-caret-right"></i> 1.1 Fundamentals of Counting</h3></a>
+                <h3><a href="countingtechniques.html"><i class="fa fa-caret-right"></i> 1.2 Counting Techniques</h3></a>
+                <h3><a href="combinatoricalidentities.html"><i class="fa fa-caret-right"></i> 1.3 Combinatorical Identities</h3></a>
+                <h3><i class="fa fa-caret-right"></i> 1.4 Distinguishable vs. Indistinguishable</h3>
+            </div>
+            <div class="section2 mainsection">
+                <h2><i class="fa-solid fa-dice"></i> Intro to Probability</h2>
+                <h3><i class="fa fa-caret-right"></i> 2.1 Conditional Probability</h3>
+                <h3><i class="fa fa-caret-right"></i> 2.2 Geometric Probability</h3>
+            </div>
+        </div>
+        <div class="content-area">
+            <div class="header">
+                <img src="/public/img/dicecover.jpg">
+                <div class="divider"></div>
+                <h2>JHMC Academy | Combinatorics</h2>
+                <h1>1.2: Counting Techniques</h1>
+            </div>
+            <div class="content">
+                <p>will needs an intro.</p>
+            </div>
+            <div class="method1 methods">
+                <h1>Factorials</h1>
+                <div class="divider"></div>
+                <p>Consider having \(5\) cows named Alex, Bessie, Charlie, Daisy, and Emily. If you wanted to arrange your cows, you might wonder how many ways that's possible. Thus, let’s consider the first position. Since you could place any cow in the first position, there are \(5\) ways you could pick the cow that goes first (for example, pick Bessie). Then, in the second position, you can pick any other cow that wasn’t already picked (so the four excluding Bessie). As you might see, continuing this process until the last cow has been chosen would lead you to having a total of \(5x4x3x2x1\) ways in order to arrange your cows. However, if we had instead \(10\) cows, or even \(100\) cows, such a notation would get massive. As such, let us shorten that idea of multiplying all of the numbers down to \(1\) as \(n!\). \(n!\) is a function such that it is equal to \((n)\cdot(n-1)\cdot(n-2)\cdot(n-3)\dots3\cdot3\cdot2\cdot1\). This notation is also extremely convenient for our next topics.</p>
+            </div>
+            <div class="method2 methods">
+                <h1>Permutations</h1>
+                <div class="divider"></div>
+                <p>So with factorials, we can arrange any number of cows into a line. However, what happens if we only wanted to arrange three cows out of our five, for example for a county fair? Obviously, we can apply the same process that we had before: which cow should we pick to be in the first position? Well, we can have \(5\) different cows. And then, in the second position, \(4\) different cows. Finally, in our last position, \(3\) different cows. Notably, we have stopped before place \(5-3=2\). So what would happen if we expanded the amount of cows or changed the amount of cows picked? If we say that \(n\) is the amount of cows, and that \(r\) is the amount of cows picked, we would see that there are \(n(n-1)(n-2)(n-3)\dots(n-r+1)(n-r)\) ways of doing so. Now then, since we stop before multiplying the rest of the way down to one, we might notice that if we multiplied that amount by \(n-r!\), we would get \(n!\). So, we can dictate the amount of permutations (which means to pick a certain number of things and put them in an order) is exactly \(\frac{n!}{n-r!}\).</p>
+            </div>
+            <div class="method3 methods">
+                <h1>Combinations</h1>
+                <div class="divider"></div>
+                <p>What if instead of arranging into a line, we just wanted to pick a group? Well, this must be related in some way to permutations. In fact, we can pick the cows and arrange them into a group. But then, we have to account for how they are arranged (if there are \(x\) ways to arrange them, we should divide that from the permutations formula). Helpfully, in our first section we found that the amount of ways to arrange is the factorial. So, the amount of ways to pick a group of r from n is \(nCr = \frac{n!}{r!(n-r)!}\). What does this look like? Well, suppose you had to choose \(3\) books to take with you on vacation, and you have \(10\) books. How many different ways is that possible? According to our formula, there are \(\frac{10!}{3!7!}\) ways, or \(120\) ways.</p>
+            </div>
+            <div class="navbuttons">
+                <div class="previous">
+                    <a href="fundamentalsofcounting.html"><h1>← Fundamentals of Counting</h1></a>
+                </div>
+                <div class="next">
+                    <a href="combinatoricalidentities.html"><h1>Combinatorial Identities →</h1></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

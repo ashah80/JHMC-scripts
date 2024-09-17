@@ -1,0 +1,157 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+}
+.top {
+    margin-top: -20px;
+    background-color: #193768;
+    color: white;
+    height: 100px;
+}
+.top p {
+    padding: 25px;
+    padding-left: 50px;
+}
+.top h1 {
+    margin-top: -40px;
+    margin-left: 50px;
+}
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.navbar {
+    width: 250px;
+    background-color: #dfdede;
+    padding: 20px;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.299);
+    height: 100%;
+}
+
+.content-area {
+    flex: 1;
+    padding: 5em;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 1em; 
+}
+
+.header img {
+    width: 70em;
+    height: 20em;
+    border-radius: 1em;
+}
+
+.header .divider {
+    width: 60em;
+    height: .2em;
+    background-color: #193768;
+}
+
+.header h2, .header h1 {
+    margin: 0;
+}
+
+.header h1 {
+    font-size: 3em;
+    color: #171A1FFF;
+}
+
+.header h2 {
+    color: #193768;
+    font-size: 1em;
+}
+
+.content {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-indent: 1.5em;
+}
+
+.navbuttons, .navbuttons a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em; 
+    color: #193768;
+    text-decoration: none;
+}
+
+.navbuttons .previous, .navbuttons .next {
+    font-size: 0.5em;
+    color: #171A1FFF;
+    cursor: pointer; 
+    white-space: nowrap;
+    margin: 0; 
+    line-height: 1; 
+}
+
+.navbar h1 {
+    color: #193768;
+    margin-top: 5px;
+    font-size: .8em;
+    text-align: center;
+}
+.navbar h2 a, h3 a, h1 a {
+    color: #171A1FFF;
+}
+.navbar h4 {
+    color: #171A1FFF;
+    margin-top: 20px;
+    font-size: 1.5em;
+    text-align: center;
+}
+.navbar .section1 h2 {
+    margin-top: -10px;
+}
+.navbar .section1, .navbar .section2 {
+    margin-top: 20px;
+}
+.navbar h2, .navbar h3 {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.navbar h3 {
+    font-weight: normal;
+    margin-left: 1em;
+}
+.navbar .divider {
+    margin-top: -20px;
+    width: 100%;
+    height: .1em;
+    background-color: #193768;
+}
+
+/*methods*/
+.methods {
+    background-color: #dfdede;
+    padding: 15px;
+    border: 3px solid #c2bfbf;
+    margin-bottom: 5px;
+}
+.methods h1{
+    margin-top: -6px;
+}
+.methods .divider {
+    margin-top: -15px;
+    width: 100%;
+    height: .1em;
+    background-color: #193768;
+}

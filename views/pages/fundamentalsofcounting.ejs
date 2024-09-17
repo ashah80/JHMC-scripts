@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentals of Counting</title>
+    <link rel="stylesheet" href="chaptermainstyles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="top">
+        <p>JHMC Academy > Combinatorics > Fundamentals of Counting</p>
+        <h1>Fundamentals of Counting</h1>
+    </div>
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html"><h1>JHMC Academy | Combinatorics</h1></a>
+            <h4>Table of Contents</h4>
+            <div class="divider"></div>
+            <div class="section1 mainsection">
+                <h2><a href="combinatorics.html"><i class="fa  fa-info-circle"></i> Introduction to Combinatorics</h2></a>
+            </div>
+            <div class="section1 mainsection">
+                <h2><a href="introductiontocounting.html"><i class="fa-solid fa-calculator"></i> Intro to Counting</h2></a>
+                <h3><a href="fundamentalsofcounting.html"><i class="fa fa-caret-right"></i> 1.1 Fundamentals of Counting</h3></a>
+                <h3><a href="countingtechniques.html"><i class="fa fa-caret-right"></i> 1.2 Counting Techniques</h3></a>
+                <h3><a href="combinatoricalidentities.html"><i class="fa fa-caret-right"></i> 1.3 Combinatorical Identities</h3></a>
+                <h3><i class="fa fa-caret-right"></i> 1.4 Distinguishable vs. Indistinguishable</h3>
+            </div>
+            <div class="section2 mainsection">
+                <h2><i class="fa-solid fa-dice"></i> Intro to Probability</h2>
+                <h3><i class="fa fa-caret-right"></i> 2.1 Conditional Probability</h3>
+                <h3><i class="fa fa-caret-right"></i> 2.2 Geometric Probability</h3>
+            </div>
+        </div>
+        <div class="content-area">
+            <div class="header">
+                <img src="/public/img/dicecover.jpg">
+                <div class="divider"></div>
+                <h2>JHMC Academy | Combinatorics</h2>
+                <h1>1.1: Fundamentals of Counting</h1>
+            </div>
+            <div class="content">
+                <p>The following four methods in this section are the fundamental ways in which a combinatorial problem may be solved. Every combinatorial solution will fall into one (or more) of these categories. Oftentimes, multiple methods may be employed in conjunction to solve a more complicated problem. These methods are not so much formulas to use as they are angles of approach that you can take when dealing with a probem. Thus, these subsections will not have very many example problems.</p>
+            </div>
+            <div class="method1 methods">
+                <h1>Direct Counting</h1>
+                <div class="divider"></div>
+                <p>When solving a counting problem, solutions may either be direct or indirect. Direct counting, as the name suggests, involves directly counting the number of cases that satisfy your conditions. Direct counting, like complementary counting, may often employ several different techniques and theorems such as casework, permutations, etc. As a very simple example, let us say Drew the Dog gets a treat every weekday. If we want to calculate how many treats he has received after \(8\) weeks, we can just multiply \(8 \cdot 5\) to get our answer of \(\boxed{40}\) dog treats.</p>
+            </div>
+            <div class="method2 methods">
+                <h1>Complementary Counting</h1>
+                <div class="divider"></div>
+                <p>Complementary counting involves counting the number of cases that fail, and subtracting that number from the total number of cases. Oftentimes, direct counting may be complicated, with many different annoying cases to bash. Thus, complementary counting represents a possible simpler alternative. If Roy the Rooster has \(5\) unique worms in front of him, how many ways can he eat \(2\) or more of the worms? Here, instead of counting the cases in which he eats \(2\), \(3\), \(4\), and \(5\) worms, we can count the ways in which he eats \(1\) or \(0\) worms. There are \(5\) ways to eat \(1\) of the worms, since he can pick any of the \(5\) worms to eat. There is \(1\) way to eat \(0\) worms trivially. Thus, there are \(6\) ways where Roy fails to meet his conditions. There are \(32\) total cases here, since for each worm, there are \(2\) possibilities for them: eaten or uneaten. \(2^5\) is 32. Because there are \(6\) ways in which Roy fails, there are \(32-6 = \boxed{26}\) ways in which he succeeds in his conditions.</p>
+            </div>
+            <div class="method3 methods">
+                <h1>Casework</h1>
+                <div class="divider"></div>
+                <p>As the name suggests, casework is employed when you have multiple cases to consider. Sometimes, you cannot solve your problem with just one calculation, and you have to consider multiple different “sets” of successful cases that all satisfy your condition. Going back to Roy and his worms, let us use casework instead of complementary counting. Here, we must split our count up into \(4\) different cases: a case for each number of worms Roy decides to eat. There are \(10\) ways for Roy to eat \(2\) worms, \(10\) ways for Roy to eat \(3\) worms, \(5\) ways for Roy to eat \(4\) worms, and \(1\) way for Roy to eat all \(5\) worms. If you do not understand how we got these numbers, I suggest looking at our combinations sections under “Counting Techniques”. If we add all of these up, you will see that we reach an answer of \(\boxed{26}\), which is the same answer we got when we used complementary counting.</p>
+            </div>
+            <div class="method4 methods">
+                <h1>Overcounting</h1>
+                <div class="divider"></div>
+                <p>Oftentimes, overcounting your successful cases with a simple calculation and subsequently subtracting the number of “overlapping” or “overcounted” cases may be a quick method to supplement casework. A concept that encapsulates this idea is the principle of inclusion-exclusion, also known as <b>PIE</b>. Here is a question, how many numbers less than or equal to \(200\) are divisible by either \(4\) or \(5\)? We know there are \(\frac{200}{4} = 50\) numbers divisible by \(4\) and \(\frac{200}{5} = 40\) numbers divisible by \(5\), so the number we get is \(90\). However, we are overcounting numbers divisible by both \(4\) and \(5\) at the same time. For example, we counted \(20\) as one of our numbers when we were considering divisibility by \(4\), but we also counted it once more when considering divisibility by \(5\). Thus, we have overcounted. To fix this, just subtract the number of numbers divisible by both \(4\) and \(5\). This is \(10\) numbers. Thus, our actual answer is \(90 - 10 = \boxed{80}\) numbers.</p>
+            </div>
+            <div class="navbuttons">
+                <div class="previous">
+                    <a href="introductiontocounting.html"><h1>← Introduction to Counting</h1></a>
+                </div>
+                <div class="next">
+                    <a href="countingtechniques.html"><h1>Counting Techniques →</h1></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
