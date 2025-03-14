@@ -5,7 +5,7 @@ const app = express();
 const AirtablePlus = require('airtable-plus');
 const DotEnv = require('dotenv').config({ path: './../.env' });
 const fs = require("fs");
-const { mdToPdf } = require('md-to-pdf');
+var markdownpdf = require("markdown-pdf")
 
 const saveAllPdfs = true;
 
@@ -26,7 +26,7 @@ const generateJoinLinks = async () => {
             let studentNames = school.fields["Student Names"];
             let studentLinks = school.fields["Student Links"];
             let students = [];
-           
+        
             try {
                 studentNames.forEach((studentName, i) => {
                     students.push({
@@ -37,12 +37,14 @@ const generateJoinLinks = async () => {
             }
             catch(e) { console.log(e); }
 
-            let studentLinkTexts = students.map(s => s.name + ": "+`[${s.link}](${s.link})`).join(" \\\n");
-            let schoolMd = `# ${schoolName}\n## Coached By ${school.fields["Coach Name"]}\n### Division ${school.fields["Division"]}\n${studentLinkTexts}\n<div style="page-break-after: always;"></div>\n\n`;
+            let studentLinkTexts = students.map(s => s.name + ": "+`[Testing Portal Link](${s.link})`).join(" \\\n");
+            let schoolMd = `# ${schoolName}\n## Coached By ${school.fields["Coach Name"]}\n### Division ${school.fields["Division"]}\n${studentLinkTexts}\n\n\n`;
             console.log(schoolMd);
             // console.log(studentLinks);
-            await mdToPdf({ content: schoolMd }, { dest: `./private-data/schedule-links/${schoolName}.pdf` });
-
+            let outputPath = `./private-data/schedule-links/${schoolName}.pdf`;
+            await markdownpdf().from.string(schoolMd).to(outputPath, function () {
+              console.log("Created", outputPath)
+            })
             finalMd += schoolMd;
         });
         console.log(finalMd);
@@ -50,6 +52,7 @@ const generateJoinLinks = async () => {
             // for some reason, this line doesn't work for me. leaving it here for the future if someone wants a list of all schools.
             // await mdToPdf({ content: finalMd }, { dest: `schedule-links.pdf` });
         }
+        
     } catch (e) {
         console.log(e);
     }

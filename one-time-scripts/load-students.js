@@ -21,7 +21,7 @@ const schoolAttributes = ['Coach Name', 'Email Address', 'Division'];
 const tableValues = ['Coach Name', 'Coach Email', 'Division'];
 
 // Change once we get actual rosters
-const csvFilePath = './private-data/2024roster.csv';
+const csvFilePath = './private-data/2025roster.csv';
 
 
 function csvToJson(csv) {
@@ -29,11 +29,12 @@ function csvToJson(csv) {
     const headers = lines[0].split(',');
     const jsonArray = [];
 
-    for (let i = 1; i < lines.length; i++) {
+    for (let i = 1; i < lines.length -1; i++) {
         const values = lines[i].split(',');
         const obj = {};
 
         for (let j = 0; j < headers.length; j++) {
+            //console.log(values[j]+ "i:"+ i+"j: "+ j);
             obj[headers[j].trim()] = values[j].trim();
         }
 
@@ -50,10 +51,10 @@ function csvToJson(csv) {
     //const registration = await CSV().fromFile(csvFilePath);
     
     //RUN ONCE TO GET THE JSON FILE
-    //const registration = csvToJson(lib_fs.readFileSync(csvFilePath).toString());
+    const registration = csvToJson(lib_fs.readFileSync(csvFilePath).toString());
     
     // DUPLICATE THE JSON FILE AND RUN THE LINE BELOW
-    const registration = JSON.parse(lib_fs.readFileSync("./outfile_registration_duplicate.json").toString());
+    //const registration = JSON.parse(lib_fs.readFileSync("./outfile_registration_duplicate.json").toString());
     
     lib_fs.writeFileSync("outfile_registration.csv", lib_fs.readFileSync(csvFilePath));
     lib_fs.writeFileSync("outfile_registration.json", JSON.stringify(registration));
@@ -180,7 +181,7 @@ function csvToJson(csv) {
                     maxRecords: 1
                 });
                 
-                //console.log(schoolData);
+                console.log(schoolData);
 
                 finalJSON['Name'] = student;
 

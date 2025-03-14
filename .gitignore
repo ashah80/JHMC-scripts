@@ -137,3 +137,15 @@ schools-private-rosters/*
 #Gcloud
 .*/
 package-lock.json
+output_dat_St Raphael School.json
+output_dat_Quest Academy.json
+output_dat_Novi Middle School.json
+outfile_registration.csv
+outfile_registration.json
+output_dat_CGS.json
+output_dat_Fred Rodgers Magnet Academy.json
+output_dat_Gibraltar Math Gurus & Pi Kings.json
+output_dat_Glen Crest.json
+output_dat_Hanci Team.json
+output_dat_Mary Ellen Henderson Middle School.json
+*.js
