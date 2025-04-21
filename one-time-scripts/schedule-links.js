@@ -42,7 +42,7 @@ const generateJoinLinks = async () => {
             console.log(schoolMd);
             // console.log(studentLinks);
             let outputPath = `./private-data/schedule-links/${schoolName}.pdf`;
-            await markdownpdf().from.string(schoolMd).to(outputPath, function () {
+            await  ().from.string(schoolMd).to(outputPath, function () {
               console.log("Created", outputPath)
             })
             finalMd += schoolMd;

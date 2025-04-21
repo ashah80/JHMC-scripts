@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import AirtablePlus from 'airtable-plus';
 import { apiKey, baseID } from '../../secrets.js';
-const { mdToPdf } = require('md-to-pdf');
+var markdownpdf = require("markdown-pdf")
 const shell = require('shelljs');
 
 const numQuestions = 20;
@@ -265,7 +265,7 @@ const testsTable = new AirtablePlus({ tableName: "Tests", apiKey, baseID }),
 
         let questionsMd = sortedQuestions.map(question => {
             let md = questionTemplate;
-            md = md.replace("{{questionColor}}", question.correct ? "green" : "red");
+            md = md.replace("{{questionColor}}", question.correct ? "" : "");// left green right red
             md = md.replace("{{questionNumber}}", question.questionNumber.toString());
             md = md.replace("{{studentAnswer}}", question.studentAnswer.length == 0 ? " " : question.studentAnswer);
             md = md.replace("{{correctAnswer}}", question.correctAnswer);
@@ -275,7 +275,7 @@ const testsTable = new AirtablePlus({ tableName: "Tests", apiKey, baseID }),
 
         let reportMd = reportTemplate
         reportMd = reportMd.replace("{{studentName}}", test['Student Names'].join(', ') + " - " + test['School Name'][0]);
-        reportMd = reportMd.replace("{{subtitle}}", "Junior High Math Contest 2021 Student Score Report");
+        reportMd = reportMd.replace("{{subtitle}}", "Junior High Math Contest 2025 Student Score Report");
         reportMd = reportMd.replace("{{competitionName}}", competitionName);
         reportMd = reportMd.replace("{{score}}", test.totalPoints.toPrecision(4));
         reportMd = reportMd.replace("{{disclaimer}}", test.disclaimer);
@@ -289,7 +289,10 @@ const testsTable = new AirtablePlus({ tableName: "Tests", apiKey, baseID }),
             if (!(pathExists)){
                 await shell.mkdir("-p", path);
             }
-            mdToPdf({content: reportMd},  { dest: path + `/${test['Student Names'].join(" ")}.pdf` });
+            let outputPath = path + `/${test['Student Names'].join(" ")}.pdf`;
+            await markdownpdf().from.string(reportMd).to(outputPath, function () {
+                console.log("Created", outputPath)
+            })
         } catch (e) {
             console.log("Error producing student report: " + e);
         }

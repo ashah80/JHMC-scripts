@@ -1,4 +1,4 @@
-### <span style="color:{{questionColor}}">Question {{questionNumber}}</span>
+### {{questionColor}}Question {{questionNumber}}
 Correct Answer: `{{correctAnswer}}`
 
 Student Answer: `{{studentAnswer}}`
