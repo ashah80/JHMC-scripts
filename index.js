@@ -9,24 +9,24 @@ const http = require("http").createServer(app);
 const fs = require("fs");
 
 const websocket = require("./socket.js");
-const { apiKey, baseID, sampleTestId } = require("./secrets.js");
+// const { apiKey, baseID, sampleTestId } = require("./secrets.js");
 
 // baseID, apiKey, and tableName can alternatively be set by environment variables
-const testsTable = new AirtablePlus({ tableName: "Tests", apiKey, baseID }),
-  studentsTable = new AirtablePlus({ tableName: "Students", apiKey, baseID }),
-  schoolsTable = new AirtablePlus({ tableName: "Schools", apiKey, baseID }),
-  competitionsTable = new AirtablePlus({
-    tableName: "Competitions",
-    apiKey,
-    baseID,
-  }),
-  eventsTable = new AirtablePlus({ tableName: "Events", apiKey, baseID }),
-  extraneousRedirectsTable = new AirtablePlus({
-    tableName: "Redirects",
-    apiKey,
-    baseID,
-  }),
-  alertsTable = new AirtablePlus({ tableName: "Alerts", apiKey, baseID });
+// const testsTable = new AirtablePlus({ tableName: "Tests", apiKey, baseID }),
+//   studentsTable = new AirtablePlus({ tableName: "Students", apiKey, baseID }),
+//   schoolsTable = new AirtablePlus({ tableName: "Schools", apiKey, baseID }),
+//   competitionsTable = new AirtablePlus({
+//     tableName: "Competitions",
+//     apiKey,
+//     baseID,
+//   }),
+//   eventsTable = new AirtablePlus({ tableName: "Events", apiKey, baseID }),
+//   extraneousRedirectsTable = new AirtablePlus({
+//     tableName: "Redirects",
+//     apiKey,
+//     baseID,
+//   }),
+//   alertsTable = new AirtablePlus({ tableName: "Alerts", apiKey, baseID });
 
 // error function that returns the rendered error page
 const error = (res, text) => {
@@ -89,226 +89,226 @@ app.get("/about", (req, res) => {
   res.render("pages/about.ejs");
 });
 
-// any actual test
-app.get("/test/:recordId", async (req, res) => {
-  const recordId = req.params.recordId;
-  if (recordId == "sample") {
-    res.redirect("/test/" + sampleTestId);
-    return;
-  }
+// // any actual test
+// app.get("/test/:recordId", async (req, res) => {
+//   const recordId = req.params.recordId;
+//   if (recordId == "sample") {
+//     res.redirect("/test/" + sampleTestId);
+//     return;
+//   }
 
-  try {
-    let record = await testsTable.find(recordId);
-    let testBegun = false;
+//   try {
+//     let record = await testsTable.find(recordId);
+//     let testBegun = false;
 
-    if (record.fields["Start Time"] || record.fields["Submission Time"]) {
-      testBegun = true;
-    }
+//     if (record.fields["Start Time"] || record.fields["Submission Time"]) {
+//       testBegun = true;
+//     }
 
-    console.log(record);
-    let studentsPromise = record.fields.Students.map((studentId) =>
-        studentsTable.find(studentId)
-      ),
-      schoolPromise = schoolsTable.find(record.fields.School[0]),
-      competitionPromise = competitionsTable.find(record.fields.Competition[0]);
+//     console.log(record);
+//     let studentsPromise = record.fields.Students.map((studentId) =>
+//         studentsTable.find(studentId)
+//       ),
+//       schoolPromise = schoolsTable.find(record.fields.School[0]),
+//       competitionPromise = competitionsTable.find(record.fields.Competition[0]);
 
-    // let [competition, school, ...students] = await Promise.all([competitionPromise, schoolPromise, ...studentsPromise]);
-    let [competition, ...students] = await Promise.all([
-      competitionPromise,
-      ...studentsPromise,
-    ]);
+//     // let [competition, school, ...students] = await Promise.all([competitionPromise, schoolPromise, ...studentsPromise]);
+//     let [competition, ...students] = await Promise.all([
+//       competitionPromise,
+//       ...studentsPromise,
+//     ]);
 
-    let questions = await tests.getOrderedQuestions(
-      record,
-      competition.fields.Code
-    );
+//     let questions = await tests.getOrderedQuestions(
+//       record,
+//       competition.fields.Code
+//     );
 
-    let available = tests.validateTime(competition, record, false),
-      currentQuestion = record.fields["Current Question Index"];
+//     let available = tests.validateTime(competition, record, false),
+//       currentQuestion = record.fields["Current Question Index"];
 
-    console.log(available);
+//     console.log(available);
 
-    if (!testBegun && currentQuestion && currentQuestion != 0) {
-      currentQuestion = 0;
-      testsTable.update(record.id, { "Current Question Index": 0 });
-    }
+//     if (!testBegun && currentQuestion && currentQuestion != 0) {
+//       currentQuestion = 0;
+//       testsTable.update(record.id, { "Current Question Index": 0 });
+//     }
 
-    if (record.id == sampleTestId) {
-      await testsTable.update(record.id, { "Current Question Index": 0 });
-      currentQuestion = 0;
-      testBegun = false;
-    }
+//     if (record.id == sampleTestId) {
+//       await testsTable.update(record.id, { "Current Question Index": 0 });
+//       currentQuestion = 0;
+//       testBegun = false;
+//     }
 
-    let name = students.map((s) => s.fields.Name).join(", "),
-      competitionName = competition.fields["Friendly Name"];
+//     let name = students.map((s) => s.fields.Name).join(", "),
+//       competitionName = competition.fields["Friendly Name"];
 
-    let competitionType = competition.fields["Test Type"];
+//     let competitionType = competition.fields["Test Type"];
 
-    let liveAlerts = await websocket.getAlerts(alertsTable);
-    let alertsObject = await websocket.getAlertObject(liveAlerts),
-      alertsHtml = alertsObject.html;
+//     let liveAlerts = await websocket.getAlerts(alertsTable);
+//     let alertsObject = await websocket.getAlertObject(liveAlerts),
+//       alertsHtml = alertsObject.html;
 
-    res.render("pages/tests", {
-      name,
-      primary: name,
-      competition: competitionName,
-      secondary: competitionName + " Test",
-      division: competition.fields.Division,
-      durationText: humanizeDuration(competition.fields["Max Duration"] * 1000),
-      duration: competition.fields["Max Duration"] * 1000,
-      competitionId: competition.id,
-      competitionCode: competition.fields.Code,
-      recordId,
-      beginButtonText: testBegun ? "Resume Test" : "Begin Test",
-      numberOfQuestions: questions.length,
-      currentQuestion,
-      available,
-      competitionType,
-      individualQuestions:
-        competitionType == "One Question" ||
-        competitionType == "Spaced Questions",
-      questionTemplate: fs.readFileSync("views/partials/question.ejs", "utf8"),
-      alertsHtml,
-    });
-  } catch (e) {
-    console.log(e);
-    error(res, "Error fetching: " + e);
-  }
-});
+//     res.render("pages/tests", {
+//       name,
+//       primary: name,
+//       competition: competitionName,
+//       secondary: competitionName + " Test",
+//       division: competition.fields.Division,
+//       durationText: humanizeDuration(competition.fields["Max Duration"] * 1000),
+//       duration: competition.fields["Max Duration"] * 1000,
+//       competitionId: competition.id,
+//       competitionCode: competition.fields.Code,
+//       recordId,
+//       beginButtonText: testBegun ? "Resume Test" : "Begin Test",
+//       numberOfQuestions: questions.length,
+//       currentQuestion,
+//       available,
+//       competitionType,
+//       individualQuestions:
+//         competitionType == "One Question" ||
+//         competitionType == "Spaced Questions",
+//       questionTemplate: fs.readFileSync("views/partials/question.ejs", "utf8"),
+//       alertsHtml,
+//     });
+//   } catch (e) {
+//     console.log(e);
+//     error(res, "Error fetching: " + e);
+//   }
+// });
 
-//endpoints for current tests to start; I built this part before websockets were implemented
-//now, to do this, i would just use websockets
-app.post("/test/endpoint/:recordId", async (req, res) => {
-  const recordId = req.params.recordId;
+// //endpoints for current tests to start; I built this part before websockets were implemented
+// //now, to do this, i would just use websockets
+// app.post("/test/endpoint/:recordId", async (req, res) => {
+//   const recordId = req.params.recordId;
 
-  let record = await testsTable.find(recordId),
-    competition = await competitionsTable.find(record.fields.Competition[0]),
-    competitionType = competition.fields["Test Type"],
-    individualQuestions =
-      competitionType == "One Question" ||
-      competitionType == "Spaced Questions";
+//   let record = await testsTable.find(recordId),
+//     competition = await competitionsTable.find(record.fields.Competition[0]),
+//     competitionType = competition.fields["Test Type"],
+//     individualQuestions =
+//       competitionType == "One Question" ||
+//       competitionType == "Spaced Questions";
 
-  const questionsPromise = tests.getOrderedQuestions(
-    record,
-    req.body.competitionCode
-  );
+//   const questionsPromise = tests.getOrderedQuestions(
+//     record,
+//     req.body.competitionCode
+//   );
 
-  if (tests.validateTime(competition, record, true) !== "true") {
-    res.send("TIMEOUT");
-    return;
-  }
+//   if (tests.validateTime(competition, record, true) !== "true") {
+//     res.send("TIMEOUT");
+//     return;
+//   }
 
-  if (req.body.action == "begin") {
-    try {
-      let questions = await questionsPromise;
-      let numberQuestionsCompleted =
-        record.fields["Current Question Index"] || 0;
+//   if (req.body.action == "begin") {
+//     try {
+//       let questions = await questionsPromise;
+//       let numberQuestionsCompleted =
+//         record.fields["Current Question Index"] || 0;
 
-      if (record.id === sampleTestId) {
-        const time = Date.now();
-        testsTable.update(recordId, { "Start Time": time });
-        record.fields["Start Time"] = time; // Could reaquire record, but that would take a lot of time — this is easier & faster
-      } else if (
-        record.fields["Start Time"] &&
-        numberQuestionsCompleted === questions.length
-      ) {
-        res.send("FINISHED");
-        return;
-      } else if (!record.fields["Start Time"]) {
-        // if test has not been started
-        const time = Date.now();
-        const startTimePromise = testsTable.update(recordId, {
-          "Start Time": time,
-        });
-        record.fields["Start Time"] = time; // Could reaquire record, but that would take a lot of time — this is easier & faster
-        const currentQuestionIndexPromise = testsTable.update(recordId, {
-          "Current Question Index": 0,
-        });
-      }
+//       if (record.id === sampleTestId) {
+//         const time = Date.now();
+//         testsTable.update(recordId, { "Start Time": time });
+//         record.fields["Start Time"] = time; // Could reaquire record, but that would take a lot of time — this is easier & faster
+//       } else if (
+//         record.fields["Start Time"] &&
+//         numberQuestionsCompleted === questions.length
+//       ) {
+//         res.send("FINISHED");
+//         return;
+//       } else if (!record.fields["Start Time"]) {
+//         // if test has not been started
+//         const time = Date.now();
+//         const startTimePromise = testsTable.update(recordId, {
+//           "Start Time": time,
+//         });
+//         record.fields["Start Time"] = time; // Could reaquire record, but that would take a lot of time — this is easier & faster
+//         const currentQuestionIndexPromise = testsTable.update(recordId, {
+//           "Current Question Index": 0,
+//         });
+//       }
 
-      // let [other] = await Promise.all([startTimePromise, currentQuestionIndexPromise]);
-      if (individualQuestions) {
-        res.status(200).json({
-          questions: [questions[numberQuestionsCompleted]],
-          closingTime: tests.getEndTime(competition, record).toString(),
-        });
-      } else {
-        res.status(200).json({
-          questions,
-          closingTime: tests.getEndTime(competition, record).toString(),
-        });
-      }
-    } catch (e) {
-      console.log(e);
-      res.error("Something went wrong " + e.toString());
-    }
-  } else if (req.body.action == "next") {
-    try {
-      let questions = await questionsPromise;
-      let answers = req.body.answers,
-        numberQuestionsCompleted,
-        newNumberOfQuestionsCompleted;
+//       // let [other] = await Promise.all([startTimePromise, currentQuestionIndexPromise]);
+//       if (individualQuestions) {
+//         res.status(200).json({
+//           questions: [questions[numberQuestionsCompleted]],
+//           closingTime: tests.getEndTime(competition, record).toString(),
+//         });
+//       } else {
+//         res.status(200).json({
+//           questions,
+//           closingTime: tests.getEndTime(competition, record).toString(),
+//         });
+//       }
+//     } catch (e) {
+//       console.log(e);
+//       res.error("Something went wrong " + e.toString());
+//     }
+//   } else if (req.body.action == "next") {
+//     try {
+//       let questions = await questionsPromise;
+//       let answers = req.body.answers,
+//         numberQuestionsCompleted,
+//         newNumberOfQuestionsCompleted;
 
-      console.log(req.body.answers);
-      if (individualQuestions) {
-        // For individual questions, we have to withstand using the current question index, otherwise somebody could theoretically change the question code on submission
-        numberQuestionsCompleted = record.fields["Current Question Index"];
-        let answeredQuestion = questions.find(
-          (q) => q.index == numberQuestionsCompleted
-        );
-        testsTable.update(recordId, {
-          [answeredQuestion.questionCode]: req.body.answers[0].text,
-        });
+//       console.log(req.body.answers);
+//       if (individualQuestions) {
+//         // For individual questions, we have to withstand using the current question index, otherwise somebody could theoretically change the question code on submission
+//         numberQuestionsCompleted = record.fields["Current Question Index"];
+//         let answeredQuestion = questions.find(
+//           (q) => q.index == numberQuestionsCompleted
+//         );
+//         testsTable.update(recordId, {
+//           [answeredQuestion.questionCode]: req.body.answers[0].text,
+//         });
 
-        newNumberOfQuestionsCompleted =
-          parseInt(record.fields["Current Question Index"]) + 1;
+//         newNumberOfQuestionsCompleted =
+//           parseInt(record.fields["Current Question Index"]) + 1;
 
-        if (newNumberOfQuestionsCompleted === questions.length) {
-          const time = await testsTable.update(record.id, {
-            "Submission Time": Date.now(),
-          });
-          res.send("FINISHED");
-        } else {
-          res.status(200).json({
-            questions: [questions[newNumberOfQuestionsCompleted]],
-            closingTime: tests.getEndTime(competition, record).toString(),
-          });
-        }
-      } else {
-        newNumberOfQuestionsCompleted = questions.length;
-        await Promise.all(
-          answers.map((answer) => {
-            // returning a promise which is received and awaited by Promise.all
-            return testsTable.update(recordId, {
-              [answer.questionCode]: answer.text,
-            });
-          })
-        );
-        const time = await testsTable.update(record.id, {
-          "Submission Time": Date.now(),
-        });
-        res.status(200).send("FINISHED");
-      }
+//         if (newNumberOfQuestionsCompleted === questions.length) {
+//           const time = await testsTable.update(record.id, {
+//             "Submission Time": Date.now(),
+//           });
+//           res.send("FINISHED");
+//         } else {
+//           res.status(200).json({
+//             questions: [questions[newNumberOfQuestionsCompleted]],
+//             closingTime: tests.getEndTime(competition, record).toString(),
+//           });
+//         }
+//       } else {
+//         newNumberOfQuestionsCompleted = questions.length;
+//         await Promise.all(
+//           answers.map((answer) => {
+//             // returning a promise which is received and awaited by Promise.all
+//             return testsTable.update(recordId, {
+//               [answer.questionCode]: answer.text,
+//             });
+//           })
+//         );
+//         const time = await testsTable.update(record.id, {
+//           "Submission Time": Date.now(),
+//         });
+//         res.status(200).send("FINISHED");
+//       }
 
-      testsTable.update(recordId, {
-        "Current Question Index": newNumberOfQuestionsCompleted,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  } else {
-    res.status(400).send("Unknown Request");
-  }
-});
+//       testsTable.update(recordId, {
+//         "Current Question Index": newNumberOfQuestionsCompleted,
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   } else {
+//     res.status(400).send("Unknown Request");
+//   }
+// });
 
-require("./schedule.js")(
-  app,
-  { eventsTable, studentsTable, schoolsTable, testsTable, alertsTable },
-  websocket,
-  error
-);
+// require("./schedule.js")(
+//   app,
+//   { eventsTable, studentsTable, schoolsTable, testsTable, alertsTable },
+//   websocket,
+//   error
+// );
 
-websocket.buildWebsocket(http, app, alertsTable);
+// websocket.buildWebsocket(http, app, alertsTable);
 
 app.get("/error", (req, res) => {
   error(res);
