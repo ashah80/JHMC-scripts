@@ -204,7 +204,7 @@
         </p>
       </div>
 
-      <!-- Timer -->
+      <!-- Timer (run with JS in timer.js)-->
       <div class="timer-display">
         <h3>0:00</h3>
         <small>Time remaining</small>
@@ -224,21 +224,7 @@
         </div>
 
         <div class="question-nav">
-          <div class="question-nav-btn current">1</div>
-          <div class="question-nav-btn">2</div>
-          <div class="question-nav-btn">3</div>
-          <div class="question-nav-btn">4</div>
-          <div class="question-nav-btn">5</div>
-          <div class="question-nav-btn">6</div>
-          <div class="question-nav-btn">7</div>
-          <div class="question-nav-btn">8</div>
-          <div class="question-nav-btn">9</div>
-          <div class="question-nav-btn">10</div>
-          <div class="question-nav-btn">11</div>
-          <div class="question-nav-btn">12</div>
-          <div class="question-nav-btn">13</div>
-          <div class="question-nav-btn">14</div>
-          <div class="question-nav-btn">15</div>
+          <!-- JS will add one .question-nav-btn per question -->
         </div>
       </div>
 
@@ -254,9 +240,9 @@
 
       <!-- Navigation buttons -->
       <div class="navigation-buttons">
-        <button class="btn btn-primary">Previous</button>
+        <button class="btn btn-primary nav-prev">Previous</button>
         <div>
-          <button class="btn btn-primary">Next</button>
+          <button class="btn btn-primary nav-next">Next</button>
         </div>
       </div>  
     </div>
@@ -267,5 +253,6 @@
 
 	<!-- Custom scripts -->
 	<script src="/practicejs/timer.js"></script>
+	<script type="module" src="/practicejs/loadTests.js"></script>
 </body>
 </html>
