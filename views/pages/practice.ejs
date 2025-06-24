@@ -206,8 +206,8 @@
 
       <!-- Timer -->
       <div class="timer-display">
-        <h3>4:48</h3>
-        <small>Minutes remaining</small>
+        <h3>0:00</h3>
+        <small>Time remaining</small>
       </div>
 
       <!-- Progress Section -->
@@ -265,36 +265,7 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<script>
-		const minutes = 30;
-
-		// Make sure everything is loaded before running the script
-		document.addEventListener('DOMContentLoaded', function() {
-		// total seconds = 30 minutes × 60
-		let timeLeft = minutes * 60;
-		const timerHeading = document.querySelector('.timer-display h3');
-
-		function formatTime(sec) {
-			const m = Math.floor(sec / 60);
-			const s = sec % 60;
-			return m + ':' + (s < 10 ? '0' + s : s);
-		}
-
-		// Update timer display every second
-		function tick() {
-			if (timeLeft < 0) {
-			clearInterval(intervalId);
-			// TODO: auto-submit quiz or disable inputs
-			return;
-			}
-			timerHeading.textContent = formatTime(timeLeft);
-			timeLeft--;
-		}
-
-		// initialize display & then start ticking every second
-		tick();
-		const intervalId = setInterval(tick, 1000);
-		});
-	</script>
+	<!-- Custom scripts -->
+	<script src="/practicejs/timer.js"></script>
 </body>
 </html>
