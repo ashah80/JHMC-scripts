@@ -68,7 +68,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 2rem;
 		}
 
 		.question-nav-btn {
@@ -167,11 +167,21 @@
             transition: all 0.3s ease;
         }
         
+		/* Override custom button css from one-page-wonder.css */
         .btn-primary:hover {
-            background: #0056b3;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+            background: #0056b3 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3) !important
         }
+
+		.btn-primary:focus,
+		.btn-primary:active,
+		.btn-primary.active {
+		background-color: #0056b3 !important;
+		border-color:    #0056b3 !important;
+		box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.5) !important;
+		outline: none !important;
+		}
 
 	</style>
 </head>
@@ -244,7 +254,7 @@
 
       <!-- Navigation buttons -->
       <div class="navigation-buttons">
-        <button class="btn btn-primary" disabled>Previous</button>
+        <button class="btn btn-primary">Previous</button>
         <div>
           <button class="btn btn-primary">Next</button>
         </div>
@@ -254,5 +264,37 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+		const minutes = 30;
+
+		// Make sure everything is loaded before running the script
+		document.addEventListener('DOMContentLoaded', function() {
+		// total seconds = 30 minutes × 60
+		let timeLeft = minutes * 60;
+		const timerHeading = document.querySelector('.timer-display h3');
+
+		function formatTime(sec) {
+			const m = Math.floor(sec / 60);
+			const s = sec % 60;
+			return m + ':' + (s < 10 ? '0' + s : s);
+		}
+
+		// Update timer display every second
+		function tick() {
+			if (timeLeft < 0) {
+			clearInterval(intervalId);
+			// TODO: auto-submit quiz or disable inputs
+			return;
+			}
+			timerHeading.textContent = formatTime(timeLeft);
+			timeLeft--;
+		}
+
+		// initialize display & then start ticking every second
+		tick();
+		const intervalId = setInterval(tick, 1000);
+		});
+	</script>
 </body>
 </html>
