@@ -89,6 +89,15 @@ app.get("/about", (req, res) => {
   res.render("pages/about.ejs");
 });
 
+
+// Add this route to fix the ReferenceError for /past-winners
+app.get("/past-winners", (req, res) => {
+  res.render("pages/past-winners.ejs");
+});
+
+app.get("/reach", (req, res) => {
+  res.render("pages/reach.ejs");
+});
 // // any actual test
 // app.get("/test/:recordId", async (req, res) => {
 //   const recordId = req.params.recordId;
